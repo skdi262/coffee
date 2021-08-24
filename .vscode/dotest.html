@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta id="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    모바일번호 <input type="tel" id=tel><br>
+    이름 <input type="text" id="name"><br>
+    성별 <input type="radio" name="gender" value="남자">남자
+    <input type="radio" name="gender" value="여자">여자<br>
+    생일 <input type="date" id="birth"><br>
+    거주지역<select id="order" form="myForm">
+        <option>경기</option>
+        <option>강원</option>
+        <option>충남</option>
+        <option>충북</option>
+        <option>경남</option>
+        <option>서울</option>
+        <option>부산</option>
+        <option>대전</option>
+        <option>대구</option>
+        <option>광주</option>
+        <option>인천</option>
+        <option>울산</option>        
+    </select><br>
+    관심분야 : <input type="checkbox" name="gwan"> 재테크
+    <input type="checkbox" name="gwan" value="부동산"> 부동산
+    <input type="checkbox" name="gwan" value="주식"> 주식 
+    <input type="checkbox" name="gwan" value="채권">채권 
+    <input type="checkbox" name="gwan" value="선물/옵션">선물/옵션
+    <input type="checkbox" name="gwan" value="해외투자">  해외투자
+    <input type="checkbox" name="gwan" value="공모주"> 공모주<br>
+    취미 : <input type="checkbox" name="hobby" value="골프">골프
+    <input type="checkbox" name="hobby" value="수영">수영 
+    <input type="checkbox" name="hobby"value="피트니스">피트니스 
+    <input type="checkbox" name="hobby"value="등산">등산 
+    <input type="checkbox" name="hobby" value="영화">영화 
+    <input type="checkbox" name="hobby" value="라이딩">라이딩<br>
+
+    비밀번호<input type="password" id="password"><br>
+    비밀번호확인<input type="password" id="password_ck"><br>
+
+    <input type="button" id="al_ert" value="알러트">
+    <input type="button" id="check" value="확인용버튼">
+<script>
+    var TTT=[];
+    var GGG=[];
+    var Gen=[];
+    function gender() {
+        var gen_length = document.getElementsByName("gender").length;
+        for (var i=0; i<gen_length; i++) {
+            if (document.getElementsByName("gender")[i].checked == true) {
+                // alert("성별 : "+document.getElementsByName("gender")[i].value);
+                Gen.push(document.getElementsByName("gender")[i].value)
+            }
+        }
+        
+    }
+        function hobby() {
+        var hobby_length = document.getElementsByName("hobby").length;
+        for (var i=0; i<hobby_length; i++) {
+            if (document.getElementsByName("hobby")[i].checked == true) {
+                // alert("취미 : "+document.getElementsByName("hobby")[i].value);
+                TTT.push(document.getElementsByName("hobby")[i].value)
+            }
+        }
+        
+    }
+    function gwan() {
+        var gwan_length = document.getElementsByName("gwan").length;
+        for (var i=0; i<gwan_length; i++) {
+            if (document.getElementsByName("gwan")[i].checked == true) {
+                // alert("관심분야 : "+document.getElementsByName("gwan")[i].value);
+                GGG.push(document.getElementsByName("gwan")[i].value)
+            }
+        }
+        
+    }
+    $(document).on('click',"#al_ert",function(){
+        alert(TTT+GGG)
+    })
+    // $(document)
+    // .on("click",'#check',function (){
+    //     if($('input:checkbox[name="hobby"]').is(":checked")==true){
+    //         alert("wht???");
+    //     }})
+    $(document)
+    .on("click",'#check',function (){
+        gender();
+        hobby();
+        gwan();
+        if( ($("#tel").val()=="") || ($('#name').val()=="") || ($('#birth').val())==null || ($("#order option:selected").val())==null ){
+            alert("안 쓴거 있으심")
+        }else if(($('#password').val()!="") && ($('#password').val()==$('#password_ck').val())){
+        alert("모바일번호 :" + $("#tel").val()+"\n"+"이름 : " +$('#name').val()+
+        "\n"+
+        $('#birth').val()+"\n"+$("#order option:selected").val()+"\n"+"취미 : "+TTT+"\n"+"관심분야 : "+GGG);
+        
+        // if()
+        // {alert("되네")};
+        if($('#password').val()==""){
+            alert("비밀번호를 입력해주세요")
+        }
+    }
+        }
+    )
+        
+        
+        
+    
+
+
+    
+</script>    
+    
+    
+</body>
+</html>

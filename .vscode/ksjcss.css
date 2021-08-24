@@ -1,0 +1,43 @@
+/* ksj에 대한 css */
+#wrap {background-color:
+    #fff;height: min-content;
+}
+#clickroom{list-style: none;
+   padding-left: 20px;
+   padding-top: 20px;
+   position: relative;
+   top: -40px;
+}
+#click_room_list{border:solid;
+   float: left;
+   width: 300px; 
+   margin-top: 30px;
+   margin-left: 5px;
+
+}
+#one_btns li {list-style-type: none; float: left;margin-left: 5px;}
+#roomname {
+   width: 30%;
+   background-color: aquamarine;
+   float: left; 
+   height: 200px;
+   margin-left: 50px;
+   margin-top: 50px;
+}
+#roomList {
+   background-color: antiquewhite;
+   width: 30%;
+   height :25px;
+   float: left;
+   font-size: 18px;
+   border: solid;
+}
+/* //ksj대한 css */
+/* ksj2에 대한 css */
+ul li {list-style-type: none;margin-left: 5px;}
+#readybtn li {list-style-type: none; float: left;margin-left: 5px;}
+#navi {float: left; margin-top: 20px; border: solid; width: 30%; min-width: 30%;}
+#reserv_room_li{float: left; border: solid; width: 200px;height: 200px;}
+#reserved_room{float: left; margin-left: 50px; border: solid; width: 200px ;height: 200px;}
+/* //ksj2에 대한 css */
+    

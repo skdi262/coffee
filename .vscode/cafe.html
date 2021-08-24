@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/.vscode/cafecss.css">
+<style>
+
+</style>
+</head>
+<body>
+     <!-- 메뉴선택하면 메뉴명에 표시,
+    수량 입력하고 blur하면 총액 자동계산 총액에 표시
+    추가 클릭 주문목록에 추가
+    주문목록에서 선택하고 삭제 클릭하면 확인 메세지 - >삭제
+    주문 클릭 팝업에서 주문자 모바일번호 입력만하고 확인 클릭
+    매출현황에 추가 -->
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script>
+var z=1;
+var to=0;
+
+$(document)
+.on('click','#menulist tr td', function() {
+    
+
+var x = $(this).closest('tr').index(); 
+var y = $(this).closest('td').index(); 
+AAA="아메리카노"
+AAB="카페라떼"
+AAC="카푸치노"
+AAD="에스프레소"
+
+
+if(x==0){
+    $("#oMenu").val(AAA);
+    $("#oHow").val(z)
+    $("#total").val(z*3000)
+    to=z*3000
+}
+    if(x==1){
+    $("#oMenu").val(AAD)
+    $("#oHow").val(z);
+    $("#total").val(z*2000)
+    to=z*2000
+}
+    if(x==2){
+    $("#oMenu").val(AAB)
+    $("#oHow").val(z);
+    $("#total").val(z*2500)
+    to=z*2500
+}
+    if(x==3){
+    $("#oMenu").val(AAC)
+    $("#oHow").val(z);
+    $("#total").val(z*3500)
+    to=z*3500
+}
+    z=z+1;})
+.on('click',"#delete",function(){
+    alert("삭제확인")
+    $("#orderlist tr td").remove()
+})
+.on('click',"#btnorder",function(){
+    alert("주문 확인")
+    A=[]
+    function latable(){
+    for(var i=0;i<$('#rOrder tr').length;i++){
+        for(var j=0;j<$('#rOrder td').length;j++){
+            
+            A.push($('#rOrder tr:eq('+i+') td:eq('+j+')').text())
+            }
+        }
+    }
+    BBB=prompt("모바일번호입력")
+    $('#mobile').val(BBB)
+    latable();
+    $("#last").append("<tr><td>"+BBB+"</td><td>"+A+"</td></tr>")})
+    
+.on('click',"#appen",function(){
+    alert("주문확인")
+    $('#rOrder').append("<tr><td>"+$('#oMenu').val()+"</td><td>"+(z-1)+"</td><td>잔  "+to+" 원</td></tr>");
+    $('#oMenu').val("");
+    $("#oHow").val("");
+    $("#total").val("");
+    to=0;
+    z=1;
+})
+
+function latable(){
+    for(var i=0;i<$('#rOrder tr').length;i++){
+        for(var j=0;j<$('#rOrder td').length;j++){
+            qu=($('#rOrder tr:eq('+i+') td:eq('+j+')').val())
+        }
+    }
+}
+    </script>
+    <div>
+        <div id="menu">메뉴목록
+            <table id=menulist>
+                <tr><td>아메리카노 3000</td></tr>
+                <tr><td>에스프레소 2000</td></tr>
+                <tr><td>카페라떼   2500</td></tr>
+                <tr><td>카푸치노   3500</td></tr>
+            </table>
+        </div>
+        <div id=orderlist>주문목록
+            <ul>
+                <li>
+                    <table id=rOrder>
+                        <tr><td></td><td></td><td></td></tr>
+                        
+                    </table>
+                </li>
+            </ul>
+            메뉴명 <input type="text" id=oMenu><br>
+            수량 <input type="text" id=oHow><br>
+            총액 <input type="text" id=total><br>
+            <div style="float: left;"><input type="button" id=appen value="추가">
+            <input type="button" id=delete value="삭제"><br>
+            <input type="button" id=btnorder value="주문" style="margin-left: 20px;">
+        </div>
+        </div>
+        <div id=sell>
+            매출현황<br>
+            <table  id=last>
+                <tr><td>전화번호</td><td>매출현황</td></tr>
+            </table>
+            
+            
+        </div>
+    </div>
+    
+</body>
+</html>

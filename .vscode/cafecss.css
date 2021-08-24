@@ -1,0 +1,25 @@
+#sell {
+    border: solid;
+    float:  left;
+    width: auto;
+    height: auto;
+    }
+    #orderlist {
+        border: solid;
+        float:  left;
+        width: auto;
+        height: auto;
+    }
+    #menu {
+        border: solid;
+        float:  left;
+        width: 300px;
+        height: auto;
+    }
+    #menulist{
+        border: solid 1px;
+        height: 200px;
+    }
+    ul{
+        list-style: none;
+    }

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>    
+    <body>
+        점수 : <input type="text" name=point id="point"><br>
+        <input type="button" name=btnpoint value="입력" onclick="getPoint()"><br>
+                <input type= "button" name=btnCalc value="계산" onclick="getresult()">
+                <input type= "button" name=btnzzc id="cceck" value="확인" onclick="check()">
+                <input type= "button" name=dostop value="스답!!" onclick="dostop()">
+                <input type= "button" name=jqqq id=jqqq value="제이쿼리테스트">
+                <input type= "button" name=jqkk id=jqkk value="제이쿼리테스트2">
+                <input type="text" name=jqjq id=jqjq>
+                </body>
+        <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+        <script>
+            let gn;
+            var arPoint=[];
+            function getPoint(){
+                arPoint.push(document.getElementById('point').value)                
+                alert("갑 입력됨 ㅇㅇ : "+document.getElementById('point').value+"\n"+arPoint)
+                document.getElementById('point').value = null;
+                
+                // document.write(arPoint)
+            }
+            var sum=0;
+            function getresult(){
+                for(var i =0;i<arPoint.length;i++){
+                    sum = parseInt(arPoint[i])+ sum;                    
+                    }
+                var BBB=sum;
+                // document.write(BBB)
+                alert(arPoint+"\n"+"합계 : " +sum+"\n"+"평균 : "+sum/arPoint.length)
+                }
+            function check(){
+                alert("인터벌 타이머 시작")
+                gn=6;
+                timer=setInterval(showText,1000)
+                // document.getElementById
+                // document.write(arPoint)
+            }
+            function showText(){
+                gn=gn-1;
+                $("#jqjq").val(gn+"초가 지났습니다")
+                
+                if(gn==0){
+                    dostop();
+                }
+            }
+            function dostop(){
+                clearInterval(timer)
+                $("#jqjq").val("")
+            }
+            $(document)
+            .on('click','#jqqq',function(){
+                $(this).hide()
+                $('#jqkk').show()
+                $('#jqjq').val(100);
+                // $('#jqjq').css('background-color','#fff')
+                obj={'background-color':'white'};
+            })
+            .on('click','#jqkk',function(){
+                $(this).hide()
+                $('#jqqq').show()
+                $('#jqjq').val(50)
+                $('#jqjq').css('background-color','yellow')
+            })
+            
+        </script>
+        
+        
+        
+    
+
+</html>

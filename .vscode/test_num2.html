@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 버튼 add를 누르면 prompt가 떠서 이름을 입력하시오
+    입력하면 프롬프트가 떠서 모바일 번호를 입력하시오
+    입력하면 프롬프트가 떠서 수학점수를 입력하시오 - 기본값 0
+    table에 <tr><td>이름</td><td>모바일</td><td>수학점수</td></tr> -->
+<style>
+    table {
+        border-collapse: collapse;
+    }
+    th{
+        border: 1px solid #fff;
+        background-color: black;
+        color: yellow;
+    }
+    td{ 
+        width: 100px;
+        height: 50px;
+        border: solid 1px #000;
+        background-color:#fff;
+        color: #000;
+    }
+</style>
+<body>
+    <input type="button" id="btnAdd" value="Add">
+    <input type="button" id="stop" value="stop">
+    <table id="tbl">
+        <tr><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td></tr>
+    </table>
+    <input type="text" id="QASD">
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script>
+        var RR=0;
+        var dlen=$('#tbl tr:eq(0) td').length;
+        var rlen=$('#tbl tr').length;
+        document.write(rlen)
+        document.write(dlen)
+        $(document)
+        // document.write($('#tbl tr:eq(0) td').length)
+        .ready(function(){
+        })
+        .on('click','#btnAdd',function(){
+            // ABC(RR=RR+1);
+            snake();
+            // $('#QASD').val(RR=RR+1);
+        })        
+        // function ABC(){
+        //     for(i=0;i<$('#tbl tr').length;i++){
+        //     setInterval(QWE(i),2000)
+        //     }
+        // }
+        // function QWE(q){
+        //     for(var j=0;j<$('#tbl tr:eq(0) td').length;j++){
+        //         $('#tbl tr:eq('+q+') td:eq('+j+')').text(((q*4)+1)+j)
+        //     }
+        // }
+        // 1 , 4 , 0 , 1 , 2 , 3 
+        function snake(){
+        for(i=0;i<rlen;i++){
+            if((i+2)%2==1){
+                for(g=0;g<dlen;g++){                    
+                $('#tbl tr:eq('+i+') td:eq('+g+')').text((i*dlen)+(dlen-g));
+                }
+            }
+            else{
+                // for(j=dlen-1;j>0;j--){
+                for(g=0;g<dlen;g++){
+                $('#tbl tr:eq('+i+') td:eq('+g+')').text((i*dlen+g+1));
+                }
+            }
+        // }
+        
+        }
+    }
+        
+        // 1  2  3 4 a가 홀수 일때 
+        //a-3 a-2 a-1 
+        // 8  7  6 5 a가 짝수 일때
+        //a*2
+        // 9 10 11 12   
+    // function AA(){
+    //         document.write("A")
+    //     }
+    //     BB=setInterval(AA,1000)
+    //     setTimeout(function(){
+    //         clearTimeout(BB);
+
+        // setInterval
+        // function Addall(){
+        //     $('#tbl').append('<tr><td>'+name+'</td><td>'+mob+'</td><td>'+math+'</td></tr>');
+        // }
+    </script>
+    
+</body>
+</html>
