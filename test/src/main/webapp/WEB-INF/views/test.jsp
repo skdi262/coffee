@@ -8,10 +8,10 @@
 </head>
 <body>
 <h1>
-	Hello world!
+	Test 파일
 	  
 </h1>
 
-<P>  The time on the server is ${serverTime}. </P>
+<P>  확인 좀 하자 </P>
 </body>
 </html>
