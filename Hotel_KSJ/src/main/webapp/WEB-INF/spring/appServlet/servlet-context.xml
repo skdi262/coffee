@@ -23,6 +23,20 @@
 	
 	<context:component-scan base-package="human.com.app" />
 	
+	<beans:bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	
+	<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+	<beans:property name="url" value="jdbc:oracle:thin:@lacalhost:1521:XE"/>
+	<beans:property name="username" value="ora_user"/>
+	<beans:property name="password" value="human123"/>
+	</beans:bean>
+	<beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<beans:property name="dataSource" ref="dataSource"></beans:property>
+		<beans:property name="mapperLocations" value="classpath:human/com/app/*.xml"></beans:property>
+	</beans:bean>
+	<beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<beans:constructor-arg index="0" ref="sqlSessionFactory"></beans:constructor-arg>
+	</beans:bean>
 	
 	
 </beans:beans>

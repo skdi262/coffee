@@ -13,7 +13,7 @@
 </h1>
 
 <P>일단은 확인  
-${rrr},${rgr}</P>
+${userId},${userPass}</P>
 
 <input type="button" value="돌아가기" id="btn_back">
    <script>
