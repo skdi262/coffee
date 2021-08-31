@@ -6,7 +6,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
-
+	
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
@@ -26,7 +26,7 @@
 	<beans:bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	
 	<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-	<beans:property name="url" value="jdbc:oracle:thin:@lacalhost:1521:XE"/>
+	<beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"/>
 	<beans:property name="username" value="ora_user"/>
 	<beans:property name="password" value="human123"/>
 	</beans:bean>

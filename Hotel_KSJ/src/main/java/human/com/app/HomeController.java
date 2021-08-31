@@ -1,6 +1,7 @@
 package human.com.app;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -35,6 +36,13 @@ public class HomeController {
 	}
 	@RequestMapping(value="/ksj", method=RequestMethod.POST)
 	public String ksj(HttpServletRequest hsr,Model model) {
+		// 여기서 interface호출하고 결과를 room.jsp에 전달
+		iRoom room=sqlSession.getMapper(iRoom.class);
+		ArrayList<RoominfoA> roominfo=room.getRoomList();
+		model.addAttribute("list",roominfo);
+		
+		ArrayList<RoomType> roomtype=room.getRoomType();
+		model.addAttribute("type",roomtype);
 		String id = hsr.getParameter("homeId");
 		if(!id.equals("")||!id.isEmpty()) {
 			return "ksj";
@@ -42,6 +50,9 @@ public class HomeController {
 		else {
 			return "redirect:/";
 		}
+		
+		
+		
 	}
 	@RequestMapping(value="/viewinfo", method=RequestMethod.GET)
 	public String viewinfo(HttpServletRequest hsr,ParamList pl,Model model) {
