@@ -3,8 +3,10 @@ package human.com.app;
 public class RoomType {
 	public RoomType() {
 	}
+	
 	private int typecode;
-	private String name;
+	
+	private String name;	
 	
 	
 	public int getTypecode() {
@@ -24,6 +26,5 @@ public class RoomType {
 		this.typecode = typecode;
 		this.name = name;
 	}
-	
 	
 }

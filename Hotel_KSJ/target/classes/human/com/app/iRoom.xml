@@ -5,10 +5,13 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	<!-- namespace="인터페이스의 경로명+이름" -->
 <mapper namespace="human.com.app.iRoom">
-	<select id="getRoomList" resultType="human.com.app.RoominfoA"> <!-- com.yjk.app.Roominfo  담길 그릇을 써줌 -->
+	<select id="getRoomList" resultType="human.com.app.RoominfoA">
 	<!-- select id="인테페이스의 메소드"  resultType="인터페이스의 반환데이터 타입" -->
-	select ROOMCODE,name,type,HOWMANY,HOWMUCH from room order by name
+	select a.roomcode,a.name roomname ,b.name typename , a.howmany, a.howmuch from room a, roomtype b
+where a.type=b.typecode order by roomname
 	</select>
+	
+		
 	<select id="getRoomType" resultType="human.com.app.RoomType">
 	select TYPECODE,name from ROOMTYPE order by TYPECODE
 	</select>

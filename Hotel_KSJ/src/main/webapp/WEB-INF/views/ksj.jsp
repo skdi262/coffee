@@ -26,13 +26,14 @@
 <table id="clickroom">
     <tr>
     <td>
-    <select size=10 style="width:250px">
+    <select size=10 style="width:250px" name="roomselect" id="roomselect">
        <c:forEach items="${list}" var="room">
-<option value="${room.name}" style="font:#000" >${room.name}
+<option value="${room.roomname}" style="font:#000" >${room.roomname}
 </option>
 </c:forEach>
 </select>
                 </td>
+                
                 </tr>
                 </table>            
     
@@ -42,18 +43,14 @@
 <table id="ttable"; style="align-content: center;">
 
 <tr>
-<td>객실이름</td><td><input type="text"></td>
+<td>객실이름</td><td><input type="text" id="room_select_name"></td>
 </tr>
 <tr>
     <td>
 객실분류</td>
-<td>
-<select size=10 style="width:250px">
-<c:forEach items="${type}" var="roomType">
-<option value="${roomtype.typecode}" style="font:#000" >${roomtype.name}
-+111</option>
-</c:forEach>
-</select></td>
+<td><input type="text" id="boon">
+
+</td>
 </tr>
 <tr>
 <td>숙박가능인원</td><td><input type="number">
@@ -89,9 +86,18 @@
 </div>
 <script>
 $(document)
-.on ('click','#tlqkf',function(){
-	alert($('#tlqkf'))
+.ready(function(){
+	$.post("http://localhost:8080/app/getRoomList",{},function(result){
+		
+	},'json')
 })
+
+.on('click','#roomselect',function(){
+	$('#room_select_name').val($('#roomselect').val())
+	$('#boon').val(${romm.typename})
+    
+})
+;
 </script>
     </body>
     </html>

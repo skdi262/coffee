@@ -1,19 +1,32 @@
 package human.com.app;
 
 public class RoominfoA {
+	
+	public RoominfoA() {
+	}
 	private int roomcode;
-
+	private String roomname;
+	private String typename;
+	private int type;
+	private int howmany;
+	private int howmuch;
 	public int getRoomcode() {
 		return roomcode;
 	}
 	public void setRoomcode(int roomcode) {
 		this.roomcode = roomcode;
 	}
-	public String getName() {
-		return name;
+	public String getRoomname() {
+		return roomname;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setRoomname(String roomname) {
+		this.roomname = roomname;
+	}
+	public String getTypename() {
+		return typename;
+	}
+	public void setTypename(String typename) {
+		this.typename = typename;
 	}
 	public int getType() {
 		return type;
@@ -33,19 +46,14 @@ public class RoominfoA {
 	public void setHowmuch(int howmuch) {
 		this.howmuch = howmuch;
 	}
-	private String name;
-	private int type;
-	private int howmany;
-	private int howmuch;
-	
-	public RoominfoA() {
-	}
-	public RoominfoA(int roomcode, String name, int type, int howmany, int howmuch) {
-
+	public RoominfoA(int roomcode, String roomname, String typename, int type, int howmany, int howmuch) {
+		super();
 		this.roomcode = roomcode;
-		this.name = name;
+		this.roomname = roomname;
+		this.typename = typename;
 		this.type = type;
 		this.howmany = howmany;
 		this.howmuch = howmuch;
 	}
+	
 }

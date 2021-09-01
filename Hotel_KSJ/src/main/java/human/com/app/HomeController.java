@@ -17,9 +17,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import org.json.simple.*;
 
 @Controller
 
@@ -32,17 +33,40 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
 		return "home";
-		
 	}
+	
+	@RequestMapping(value="/getRoomList",method=RequestMethod.POST,
+			produces="application/text; charset=utf8")
+	@ResponseBody
+	public String getRoomList(HttpServletRequest hsr) {
+		iRoom room=sqlSession.getMapper(iRoom.class);
+		ArrayList<RoominfoA> roominfo=room.getRoomList();
+		JSONArray ja = new JSONArray();
+		for(int i =0; i<roominfo.size();i++) {
+			JSONObject jo=new JSONObject();
+			jo.put("roomcode", roominfo.get(i).getRoomcode());
+			jo.put("roomname", roominfo.get(i).getRoomname());
+			jo.put("typecode", roominfo.get(i).getTypename());
+			jo.put("howmany", roominfo.get(i).getHowmany());
+			jo.put("howmuch", roominfo.get(i).getHowmuch());
+			ja.add(jo);
+		}
+		System.out.println(ja.toString());
+		return ja.toString();
+	}
+	
 	@RequestMapping(value="/ksj", method=RequestMethod.POST)
 	public String ksj(HttpServletRequest hsr,Model model) {
-		// 여기서 interface호출하고 결과를 room.jsp에 전달
+
 		iRoom room=sqlSession.getMapper(iRoom.class);
+		
 		ArrayList<RoominfoA> roominfo=room.getRoomList();
 		model.addAttribute("list",roominfo);
 		
+		
 		ArrayList<RoomType> roomtype=room.getRoomType();
 		model.addAttribute("type",roomtype);
+		
 		String id = hsr.getParameter("homeId");
 		if(!id.equals("")||!id.isEmpty()) {
 			return "ksj";
