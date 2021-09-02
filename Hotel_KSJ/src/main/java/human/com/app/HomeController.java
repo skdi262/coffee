@@ -46,7 +46,7 @@ public class HomeController {
 			JSONObject jo=new JSONObject();
 			jo.put("roomcode", roominfo.get(i).getRoomcode());
 			jo.put("roomname", roominfo.get(i).getRoomname());
-			jo.put("typecode", roominfo.get(i).getTypename());
+			jo.put("typename", roominfo.get(i).getTypename());
 			jo.put("howmany", roominfo.get(i).getHowmany());
 			jo.put("howmuch", roominfo.get(i).getHowmuch());
 			ja.add(jo);
@@ -54,6 +54,49 @@ public class HomeController {
 		System.out.println(ja.toString());
 		return ja.toString();
 	}
+	@RequestMapping(value="/addRoom",method=RequestMethod.POST,
+			produces="application/text; charset=utf8")
+	@ResponseBody
+	public String addRoom(HttpServletRequest hsr) {
+		String rname=hsr.getParameter("roomname");
+		int rtype=Integer.parseInt(hsr.getParameter("roomtype"));
+		int howmany=Integer.parseInt(hsr.getParameter("howmany"));
+		int howmuch=Integer.parseInt(hsr.getParameter("howmuch"));
+		iRoom room=sqlSession.getMapper(iRoom.class);
+
+		
+		
+		
+		room.doAddRoom(rname, rtype, howmany, howmuch);
+		return "ok";
+	}
+	@RequestMapping(value="/updateRoom",method=RequestMethod.POST,
+			produces="application/text; charset=utf8")
+	@ResponseBody
+	public String updateRoom(HttpServletRequest hsr) {
+		iRoom room=sqlSession.getMapper(iRoom.class);
+		room.doUpdateRoom(
+				Integer.parseInt(hsr.getParameter("roomcode")),
+				hsr.getParameter("roomname"),
+				Integer.parseInt(hsr.getParameter("roomtype")),
+				Integer.parseInt(hsr.getParameter("howmany")),
+				Integer.parseInt(hsr.getParameter("howmuch")));
+		System.out.println("roomcode");
+		return "ok";
+	}
+	
+	
+	@RequestMapping(value="/deleteRoom",method=RequestMethod.POST,
+			produces="application/text; charset=utf8")
+	@ResponseBody
+	public String deleteRoom(HttpServletRequest hsr) {
+		
+		int roomcode = Integer.parseInt(hsr.getParameter("roomcode"));
+		iRoom room=sqlSession.getMapper(iRoom.class);
+		room.doDeleteRoom(roomcode);
+		return "ok";
+	}
+	
 	
 	@RequestMapping(value="/ksj", method=RequestMethod.POST)
 	public String ksj(HttpServletRequest hsr,Model model) {

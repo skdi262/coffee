@@ -23,6 +23,7 @@ public class RoomType {
 	}
 	
 	public RoomType(int typecode, String name) {	
+		
 		this.typecode = typecode;
 		this.name = name;
 	}

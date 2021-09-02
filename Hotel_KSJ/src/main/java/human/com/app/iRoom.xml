@@ -7,7 +7,7 @@
 <mapper namespace="human.com.app.iRoom">
 	<select id="getRoomList" resultType="human.com.app.RoominfoA">
 	<!-- select id="인테페이스의 메소드"  resultType="인터페이스의 반환데이터 타입" -->
-	select a.roomcode,a.name roomname ,b.name typename , a.howmany, a.howmuch from room a, roomtype b
+	select b.typecode,a.roomcode,a.name roomname ,b.name typename, a.howmany, a.howmuch from room a, roomtype b
 where a.type=b.typecode order by roomname
 	</select>
 	
@@ -15,4 +15,14 @@ where a.type=b.typecode order by roomname
 	<select id="getRoomType" resultType="human.com.app.RoomType">
 	select TYPECODE,name from ROOMTYPE order by TYPECODE
 	</select>
+	<delete id="doDeleteRoom">
+	delete from room where roomcode=#{param1}
+	</delete>
+	<insert id="doAddRoom">
+	insert into room (roomcode,name,type,howmany,howmuch)
+	 values (seq_room.nextval,#{param1},#{param2},#{param3},#{param4})
+	</insert>
+	<update id="doUpdateRoom">
+	update room set name=#{param2}, type=#{param3},howmany=#{param4},howmuch=#{param5} where roomcode=#{param1} 
+	</update>
 </mapper>

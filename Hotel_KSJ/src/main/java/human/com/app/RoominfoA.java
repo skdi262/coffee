@@ -4,6 +4,13 @@ public class RoominfoA {
 	
 	public RoominfoA() {
 	}
+	private String typecode;
+	public String getTypecode() {
+		return typecode;
+	}
+	public void setTypecode(String typecode) {
+		this.typecode = typecode;
+	}
 	private int roomcode;
 	private String roomname;
 	private String typename;
@@ -46,8 +53,9 @@ public class RoominfoA {
 	public void setHowmuch(int howmuch) {
 		this.howmuch = howmuch;
 	}
-	public RoominfoA(int roomcode, String roomname, String typename, int type, int howmany, int howmuch) {
-		super();
+	public RoominfoA(String typecode,int roomcode, String roomname, String typename, int type, int howmany, int howmuch) {
+		
+		this.typecode = typecode;
 		this.roomcode = roomcode;
 		this.roomname = roomname;
 		this.typename = typename;
