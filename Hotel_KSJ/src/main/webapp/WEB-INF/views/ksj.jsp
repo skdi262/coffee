@@ -61,6 +61,7 @@
 </option>
 </c:forEach>
 </select>
+<input type=text id="ttest" value=''>
 </td>
 </tr>
 <tr>
@@ -108,6 +109,7 @@ $(document)
 			$('#roomselect').append(str);
 		});		
 	},'json')
+	
 })
 
 
@@ -119,6 +121,7 @@ $(document)
 	$('#boon').val(arry[2])
 	$('#hMuch').val(arry[4])
 	$('#hMany').val(arry[3])	
+	$('#ttest').val(arry[0])
     })
     
     
@@ -128,12 +131,10 @@ $(document)
 	  let roomtype=$('#rSelect').val()
 	  let howmany=$('#hMany').val()
 	 let howmuch=$('#hMuch').val()  
-	  var bad=$('#roomselect').val();    
-	var arry=bad.split(",");
-	let roomcode=arry[0]
+	 
 	
-	
-	  if(roomcode=''){
+	  if($('#ttest').val()==''){
+		  alert(howmany)
 		  $.post('http://localhost:8080/app/addRoom',{roomname:roomname,roomtype:roomtype,howmany:howmany,howmuch:howmuch},
 			 function(result){
 				  if(result=="ok"){
@@ -141,7 +142,10 @@ $(document)
 				  }
 			  })
 	  }else{
-		  alert(roomcode,roomname,roomtype,howmuch,howmany)
+		  var bad=$('#roomselect').val();    
+			var arry=bad.split(",");
+			let roomcode=$('#ttest').val(arry[0])	
+		  alert(roomcode.val())
 		  $.post('http://localhost:8080/app/updateRoom',{roomcode:roomcode,roomname:roomname,roomtype:roomtype,howmany:howmany,howmuch:howmuch},
 					 function(result){
 			  
