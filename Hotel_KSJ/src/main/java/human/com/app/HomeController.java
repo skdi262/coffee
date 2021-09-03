@@ -8,6 +8,7 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.reflection.SystemMetaObject;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+
+
 import org.json.simple.*;
 
 @Controller
@@ -54,6 +58,25 @@ public class HomeController {
 		System.out.println(ja.toString());
 		return ja.toString();
 	}
+	@RequestMapping(value="/check_user",method=RequestMethod.POST)
+	public String check_user(HttpServletRequest hsr,Model model) {
+		String userid=hsr.getParameter("homeId");
+		String passcode=hsr.getParameter("passcode");
+		iRoom room=sqlSession.getMapper(iRoom.class);
+		ArrayList<RoominfoA> roominfo=room.getRoomList();
+		model.addAttribute("list",roominfo);
+		
+		int n=room.doCheckUser(userid,passcode);
+		System.out.println(userid+""+passcode);
+		System.out.println(n);
+		if(n>0) {			
+			HttpSession session=hsr.getSession();
+			session.setAttribute("homeId", userid);			
+			return "ksj";			
+		}
+		return "redirect:/";
+	}
+	
 	@RequestMapping(value="/addRoom",method=RequestMethod.POST,
 			produces="application/text; charset=utf8")
 	@ResponseBody
@@ -84,7 +107,20 @@ public class HomeController {
 		System.out.println("roomcode");
 		return "ok";
 	}
-	
+	@RequestMapping(value ="/ssss",method = RequestMethod.POST)
+	@ResponseBody
+	public String doSignin(HttpServletRequest hsr) {
+		//insert into member ~~		
+		String signid=hsr.getParameter("signid");
+		String signName=hsr.getParameter("signName");
+		String signPass=hsr.getParameter("signPass");
+		System.out.println(signName);
+		System.out.println(signid);
+		System.out.println(signPass);
+		iRoom room=sqlSession.getMapper(iRoom.class);
+		room.doSignin(signid, signName, signPass);
+		return "ok";
+	}
 	
 	@RequestMapping(value="/deleteRoom",method=RequestMethod.POST,
 			produces="application/text; charset=utf8")
@@ -116,10 +152,7 @@ public class HomeController {
 		}
 		else {
 			return "redirect:/";
-		}
-		
-		
-		
+		}		
 	}
 	@RequestMapping(value="/viewinfo", method=RequestMethod.GET)
 	public String viewinfo(HttpServletRequest hsr,ParamList pl,Model model) {

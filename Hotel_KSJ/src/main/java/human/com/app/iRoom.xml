@@ -25,4 +25,10 @@ where a.type=b.typecode order by roomname
 	<update id="doUpdateRoom">
 	update room set name=#{param2}, type=#{param3},howmany=#{param4},howmuch=#{param5} where roomcode=#{param1} 
 	</update>
+	<insert id="doSignin">
+	insert into newmember values(#{param1},#{param2},#{param3})
+	</insert>
+	<select id="doCheckUser" resultType="int">
+	select count(*) from newmember where loginid=#{param1} and passcode=#{param2}
+	</select>
 </mapper>

@@ -55,9 +55,8 @@
 객실분류</td>
 <td>
   <select size=10 style="width:250px" name="rrrr" id="boon">
-       <c:forEach items="${list}" var="room">
-       
-<option id ="rSelect" value="${room.typecode}"  style="font:#000" >${room.typename}
+       <c:forEach items="${list}" var="room">       
+<option id ="rSelect" value="${room.typename}"  style="font:#000" >${room.typename}
 </option>
 </c:forEach>
 </select>
@@ -108,15 +107,15 @@ $(document)
 			'</option>';
 			$('#roomselect').append(str);
 		});		
-	},'json')	
+	},'json')
+	$('#boon').val(1)
 })
 
 
 .on('click','#roomselect',function(){
 	var bad=$('#roomselect').val();    
 	var arry=bad.split(",");
-	$('#room_select_name').val(arry[1])
-	
+	$('#room_select_name').val(arry[1])	
 	$('#boon').val(arry[2])
 	$('#hMuch').val(arry[4])
 	$('#hMany').val(arry[3])	

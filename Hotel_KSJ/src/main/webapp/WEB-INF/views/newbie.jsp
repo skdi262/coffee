@@ -11,21 +11,38 @@
 <h1>
 	
 </h1>
-아이디 입력 : <input type="text" id="new_id"><br>
-비밀번호 입력 : <input type="text" id="pass"><br>
-비밀번호 확인 : <input type="text" id="check_pass"><br>
-모바일 번호 : <input type="text" id="mobile"><br>
-<input type="button" id="submit" value="서브밋"> 
 
- <script>
+
+
+아이디 입력 : <input type="text" id="new_id"><br>
+비밀번호 입력 : <input type="password" id="pass"><br>
+비밀번호 확인 : <input type="password" id="check_pass"><br>
+이름: <input type="text" id="new_name"><br>
+    <input type= button id=submit value="생성">
     
-    $(document).on('click','#submit',function(){    	
-    	location.href = "/app/newinfo?new_id="+$("#new_id").val()
-    			+"&new_password="+$("#pass").val()
-    			+"&new_passcheck="+$("#check_pass").val()
-    			+"&mob="+$("#mobile").val();
-    }
-    )    
+ <script>
+$(document)
+.ready(function(){
+	
+})
+.on('click','#submit',function(){
+	let signid=$('#new_id').val()
+	let signName=$('#new_name').val()
+	let signPass=$('#pass').val()
+	alert(signid+""+signName+""+signPass)
+	if(signPass==$('#check_pass'){
+	$.post('http://localhost:8081/app/ssss',{signid:signid ,signName:signName,signPass:signPass},
+			function(result){
+		if(result=="ok"){
+			location.href="http://localhost:8081/app/"
+		}
+	}
+	 )
+	}else{
+		alert("비밀번호가 일치하지 않습니다.")
+	}
+}
+)    
     
 </script>
 </body>
