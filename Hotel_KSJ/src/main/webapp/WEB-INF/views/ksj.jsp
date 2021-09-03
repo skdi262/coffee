@@ -100,7 +100,7 @@
 
 $(document)
 .ready(function(){
-	$.post("http://localhost:8080/app/getRoomList",{},function(result){
+	$.post("http://localhost:8081/app/getRoomList",{},function(result){
 		console.log(result);
 		$.each(result,function(ndx,value){
 			str='<option value="'+value['roomcode']+','+value['roomname']+','+value['typename']+','+value['howmany']+','+value['howmuch']+'">'+value['roomname']+
@@ -108,8 +108,7 @@ $(document)
 			'</option>';
 			$('#roomselect').append(str);
 		});		
-	},'json')
-	
+	},'json')	
 })
 
 
@@ -134,19 +133,20 @@ $(document)
 	 
 	
 	  if($('#ttest').val()==''){
-		  alert(howmany)
-		  $.post('http://localhost:8080/app/addRoom',{roomname:roomname,roomtype:roomtype,howmany:howmany,howmuch:howmuch},
-			 function(result){
+		  alert(roomname+""+roomtype+""+howmany+""+howmuch)
+		  $.post('http://localhost:8081/app/addRoom',{roomname:roomname,roomtype:roomtype,howmany:howmany,howmuch:howmuch},
+			 function(result){			  
 				  if(result=="ok"){
 					  location.reload();
 				  }
 			  })
-	  }else{
+	  }
+	  else{
 		  var bad=$('#roomselect').val();    
 			var arry=bad.split(",");
-			let roomcode=$('#ttest').val(arry[0])	
-		  alert(roomcode.val())
-		  $.post('http://localhost:8080/app/updateRoom',{roomcode:roomcode,roomname:roomname,roomtype:roomtype,howmany:howmany,howmuch:howmuch},
+			let roomcode=arry[0]
+		  alert(roomcode)
+		  $.post('http://localhost:8081/app/updateRoom',{roomcode:roomcode,roomname:roomname,roomtype:roomtype,howmany:howmany,howmuch:howmuch},
 					 function(result){
 			  
 						  if(result=="ok"){
@@ -166,7 +166,7 @@ $(document)
 .on('click','#btn-delete',function(){
 	var bad=$('#roomselect').val();    
 	var arry=bad.split(",");
-	$.post('http://localhost:8080/app/deleteRoom',{roomcode:arry[0]},
+	$.post('http://localhost:8081/app/deleteRoom',{roomcode:arry[0]},
 			function(result){
 		console.log(result);
 		if(result=="ok"){
