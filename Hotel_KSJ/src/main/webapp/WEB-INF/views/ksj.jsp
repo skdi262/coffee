@@ -2,10 +2,13 @@
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet" href=resources/ksjcss.css type="text/css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/ksjcss.css" type="text/css">
+
 <html>
 <head>
+
 	<title>Home</title>
+	
 </head>
  <body>
  <script src="https://code.jquery.com/jquery-3.4.1.js">
@@ -23,11 +26,11 @@
             </div>
             <div id="click_room_list">
                 방 목록
-<table id="clickroom">
+<table id="clickroom" style="float:right">
     <tr>
     <td>
     
-    <select size=10 style="width:250px" name="roomselect" id="roomselect">
+    <select size=10 style="width:250px;" name="roomselect" id="roomselect">
     
 <%--        <c:forEach items="${list}" var="room"> --%>
        
@@ -43,7 +46,7 @@
 </div>
 </div>
 <div id="roomname">
-<table id="ttable"; style="align-content: center;">
+<table id="ttable" style="align-content: center">
 
 <tr>
 <td>객실이름</td><td><input type="text" id="room_select_name">
@@ -99,7 +102,7 @@
 
 $(document)
 .ready(function(){
-	$.post("http://localhost:8081/app/getRoomList",{},function(result){
+	$.post("http://localhost:8080/app/getRoomList",{},function(result){
 		console.log(result);
 		$.each(result,function(ndx,value){
 			str='<option value="'+value['roomcode']+','+value['roomname']+','+value['typename']+','+value['howmany']+','+value['howmuch']+'">'+value['roomname']+
@@ -133,7 +136,7 @@ $(document)
 	
 	  if($('#ttest').val()==''){
 		  alert(roomname+""+roomtype+""+howmany+""+howmuch)
-		  $.post('http://localhost:8081/app/addRoom',{roomname:roomname,roomtype:roomtype,howmany:howmany,howmuch:howmuch},
+		  $.post('http://localhost:8080/app/addRoom',{roomname:roomname,roomtype:roomtype,howmany:howmany,howmuch:howmuch},
 			 function(result){			  
 				  if(result=="ok"){
 					  location.reload();
@@ -145,7 +148,7 @@ $(document)
 			var arry=bad.split(",");
 			let roomcode=arry[0]
 		  alert(roomcode)
-		  $.post('http://localhost:8081/app/updateRoom',{roomcode:roomcode,roomname:roomname,roomtype:roomtype,howmany:howmany,howmuch:howmuch},
+		  $.post('http://localhost:8080/app/updateRoom',{roomcode:roomcode,roomname:roomname,roomtype:roomtype,howmany:howmany,howmuch:howmuch},
 					 function(result){
 			  
 						  if(result=="ok"){
@@ -165,7 +168,7 @@ $(document)
 .on('click','#btn-delete',function(){
 	var bad=$('#roomselect').val();    
 	var arry=bad.split(",");
-	$.post('http://localhost:8081/app/deleteRoom',{roomcode:arry[0]},
+	$.post('http://localhost:8080/app/deleteRoom',{roomcode:arry[0]},
 			function(result){
 		console.log(result);
 		if(result=="ok"){

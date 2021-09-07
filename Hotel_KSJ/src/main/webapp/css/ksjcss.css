@@ -2,21 +2,21 @@
     #fff;height: min-content;
 }
 #clickroom{list-style: none;
+	text-align:center;
    padding-left: 20px;
-   padding-top: 20px;
-   position: relative;
-   top: -40px;
+   padding-top: 1px;
 }
 #click_room_list{border:solid;
+text-align:center;
    float: left;
-   width: 300px; 
+   width: 400px; 
    margin-top: 30px;
    margin-left: 5px;
 
 }
 #one_btns li {list-style-type: none; float: left;margin-left: 5px;}
 #roomname {
-   width: 30%;
+   width: auto;
    background-color: aquamarine;
    float: left; 
    height: 200px;

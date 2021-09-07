@@ -118,7 +118,9 @@ public class HomeController {
 		System.out.println(signid);
 		System.out.println(signPass);
 		iRoom room=sqlSession.getMapper(iRoom.class);
+		
 		room.doSignin(signid, signName, signPass);
+		
 		return "ok";
 	}
 	
