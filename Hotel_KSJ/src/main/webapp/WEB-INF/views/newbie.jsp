@@ -33,10 +33,10 @@ $(document)
 	let signPass=$('#pass').val()
 	alert(signid+""+signName+""+signPass)
 	if(signPass==$('#check_pass').val()){
-	$.post('http://localhost:8080/app/ssss',{signid:signid ,signName:signName,signPass:signPass},
+	$.post('http://localhost:8081/app/ssss',{signid:signid ,signName:signName,signPass:signPass},
 			function(result){
 		if(result=="ok"){
-			location.href="http://localhost:8080/app/"
+			location.href="http://localhost:8081/app/"
 		}
 	}
 	 )

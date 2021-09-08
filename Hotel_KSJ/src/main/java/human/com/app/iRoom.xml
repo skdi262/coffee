@@ -5,6 +5,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	<!-- namespace="인터페이스의 경로명+이름" -->
 <mapper namespace="human.com.app.iRoom">
+
 	<select id="getRoomList" resultType="human.com.app.RoominfoA">
 	<!-- select id="인테페이스의 메소드"  resultType="인터페이스의 반환데이터 타입" -->
 	select b.typecode,a.roomcode,a.name roomname ,b.name typename, a.howmany, a.howmuch from room a, roomtype b
@@ -31,4 +32,23 @@ where a.type=b.typecode order by roomname
 	<select id="doCheckUser" resultType="int">
 	select count(*) from newmember where loginid=#{param1} and passcode=#{param2}
 	</select>
+	<insert id="doReserv">
+	insert into reserv_room VALUES(#{param1},#{param2},#{param3})
+	</insert>
+	<select id="getReservInfo" resultType="human.com.app.ReservInfo">
+		SELECT
+        c.name rname,a.type,a.name,b.reservcode,b.checkin,b.checkout 
+        FROM
+        room a,reserv_room b,roomtype c
+        where b.reservcode=a.roomcode and a.type=c.typecode
+	</select>
+	<delete id="deleteReserv">
+		delete from reserv_room where reservcode=#{param1}
+	</delete>
+	<update id="updateReserv">
+	update reserv_room set
+checkin=#{param1},
+checkout=#{param2}
+where reservcode=#{param3}
+	</update>
 </mapper>

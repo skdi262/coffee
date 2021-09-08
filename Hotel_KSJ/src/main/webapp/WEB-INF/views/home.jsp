@@ -25,7 +25,7 @@
     })
     
     .on('submit','#formLogin',function(){
-    	location.href="/app/check_user"
+    	
     	let pstr=$.trim($('#homeId').val());
     	$('#homeId').val(pstr);
     	pbtr=$.trim($('#passcode').val());
@@ -42,4 +42,3 @@
     </script>
     </body>
     </html>
-<

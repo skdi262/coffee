@@ -39,6 +39,47 @@ public class HomeController {
 		return "home";
 	}
 	
+	
+	@RequestMapping(value="/reservRoom",method=RequestMethod.POST)
+	@ResponseBody
+	public String reservRoom(HttpServletRequest hsr,Model model) {
+	iRoom room=sqlSession.getMapper(iRoom.class);
+		String checkin=hsr.getParameter("checkin");
+		String checkout=hsr.getParameter("checkout");
+		int roomcode=Integer.parseInt(hsr.getParameter("roomcode"));
+		room.doReserv(checkin, checkout, roomcode);
+		System.out.println(checkin+"||"+checkout+"||"+roomcode);
+		
+		return "ok";
+		
+	}
+	
+	@RequestMapping(value="/getReservList",method=RequestMethod.POST,
+			produces="application/text; charset=utf8")
+	@ResponseBody
+	public String getReservList(HttpServletRequest hsr) {
+		iRoom room=sqlSession.getMapper(iRoom.class);
+		ArrayList<ReservInfo> reserv=room.getReservInfo();
+		ArrayList<RoominfoA> roominfo=room.getRoomList();
+		JSONArray ja = new JSONArray();
+		for(int i =0; i<reserv.size();i++) {
+			JSONObject jo=new JSONObject();
+			jo.put("checkin", reserv.get(i).getCheckin());
+			jo.put("checkout", reserv.get(i).getCheckout());
+			jo.put("rName", reserv.get(i).getName());
+			jo.put("newName", reserv.get(i).getRname());
+			jo.put("reservcode", reserv.get(i).getreservcode());
+			jo.put("roomcode", roominfo.get(i).getRoomcode());
+			jo.put("roomname", roominfo.get(i).getRoomname());
+			jo.put("howmany", roominfo.get(i).getHowmany());
+			jo.put("howmuch", roominfo.get(i).getHowmuch());
+			jo.put("typecode", roominfo.get(i).getTypecode());
+			jo.put("typename", roominfo.get(i).getTypename());
+			ja.add(jo);
+			}		
+		return ja.toString();
+	}
+	
 	@RequestMapping(value="/getRoomList",method=RequestMethod.POST,
 			produces="application/text; charset=utf8")
 	@ResponseBody
@@ -53,6 +94,7 @@ public class HomeController {
 			jo.put("typename", roominfo.get(i).getTypename());
 			jo.put("howmany", roominfo.get(i).getHowmany());
 			jo.put("howmuch", roominfo.get(i).getHowmuch());
+			jo.put("typecode", roominfo.get(i).getTypecode());
 			ja.add(jo);
 		}
 		System.out.println(ja.toString());
@@ -86,10 +128,6 @@ public class HomeController {
 		int howmany=Integer.parseInt(hsr.getParameter("howmany"));
 		int howmuch=Integer.parseInt(hsr.getParameter("howmuch"));
 		iRoom room=sqlSession.getMapper(iRoom.class);
-
-		
-		
-		
 		room.doAddRoom(rname, rtype, howmany, howmuch);
 		return "ok";
 	}
@@ -182,10 +220,48 @@ public class HomeController {
 		model.addAttribute("D",pl.getMob());
 		return "newinfo";
 	}
+	@RequestMapping(value="/updateReserve",method=RequestMethod.POST,
+			produces="application/text; charset=utf8")
+	@ResponseBody
+	public String updateReserve(HttpServletRequest hsr) {
+		iRoom room=sqlSession.getMapper(iRoom.class);
+		String checkin=hsr.getParameter("checkin");
+		String checkout=hsr.getParameter("checkout");
+		int reservcode=Integer.parseInt(hsr.getParameter("reservcode"));
+		System.out.println(checkin+"|"+checkout+"|"+reservcode);
+		room.updateReserv(checkin, checkout, reservcode);
+		return "ok";
+	}
+	
+	
+	@RequestMapping(value="/deleteReserve",method=RequestMethod.POST,
+			produces="application/text; charset=utf8")
+	@ResponseBody
+	public String deleteReserve(HttpServletRequest hsr) {
+		
+		int reservcode = Integer.parseInt(hsr.getParameter("reservcode"));
+		iRoom room=sqlSession.getMapper(iRoom.class);
+		room.deleteReserv(reservcode);
+		return "ok";
+	}
 
 	
-	@RequestMapping(value="/ksj2", method=RequestMethod.GET)
-	public String ksj2(ParamList pl,Model model) {	
+	@RequestMapping(value="/ksj2", method=RequestMethod.POST)
+	public String ksj2(HttpServletRequest hsr,Model model) {	
+		iRoom room=sqlSession.getMapper(iRoom.class);
+		
+//		ArrayList<ReservInfo> reservinfo=room.getReservInfo();
+//		model.addAttribute("reserv_room",reservinfo);
+		ArrayList<ReservInfo> reservinfo=room.getReservInfo();
+		model.addAttribute("rList", reservinfo);
+		
+		
+		ArrayList<RoominfoA> roominfo=room.getRoomList();
+		model.addAttribute("list",roominfo);
+		
+		
+		ArrayList<RoomType> roomtype=room.getRoomType();
+		model.addAttribute("type",roomtype);
 		return "ksj2";
 	}
 }

@@ -15,8 +15,12 @@
     </script>
 
         <div id="wrap">
-        <input type="button" name='moun' id='moun' value="객실관리" style="float: left; margin-right: 50px;">
-        <input type="button" name='reserv' id='reserv' value="예약관리" style="float: left;"> 
+         <form action ="ksj2" method = post id =ksj2 name=ksj2>
+    <input type="button" name='moun' id='moun' value="객실관리" style="float: left; margin-right: 50px;">
+        <input type="submit" name='reserv_list' id='reserv_list' value="예약관리" style="float: left;"> 
+    </form>
+    
+        
         <br>
         <br>
         <div>
@@ -57,10 +61,12 @@
     <td>
 객실분류</td>
 <td>
+
   <select size=10 style="width:250px" name="rrrr" id="boon">
-       <c:forEach items="${list}" var="room">       
+       <c:forEach items="${list}" var="room">          
 <option id ="rSelect" value="${room.typename}"  style="font:#000" >${room.typename}
 </option>
+
 </c:forEach>
 </select>
 <input type=text id="ttest" value=''>
@@ -72,6 +78,14 @@
 </tr>
 <tr>
     <td>1박요금</td><td><input type="text" id="hMuch">원
+    </td>
+    </tr>
+<tr>
+<td>체크 인</td><td><input type="date" id="checkin" name="checkin">
+    </td>
+    </tr>
+    <tr>
+<td>체크 아웃</td><td><input type="date" id="checkout" name="chechout">
     </td>
     </tr>
 
@@ -88,6 +102,12 @@
 <li>
 <input type="button" name='clear' id='btnEmpty' value="Clear"> 
 </li>
+<li>
+<input type="button" name='reserv' id='reserv' value="예약">
+</li>
+<li>
+<input type="button" name='qwe123' id='qwe123' value="확인용">
+</li>
 </ul>
 </div>
             
@@ -102,10 +122,10 @@
 
 $(document)
 .ready(function(){
-	$.post("http://localhost:8080/app/getRoomList",{},function(result){
+	$.post("http://localhost:8081/app/getRoomList",{},function(result){
 		console.log(result);
 		$.each(result,function(ndx,value){
-			str='<option value="'+value['roomcode']+','+value['roomname']+','+value['typename']+','+value['howmany']+','+value['howmuch']+'">'+value['roomname']+
+			str='<option value="'+value['roomcode']+','+value['roomname']+','+value['typename']+','+value['howmany']+','+value['howmuch']+','+value['typecode']+'">'+value['roomname']+
 			','+value['typename']+','+value['howmany']+','+value['howmuch']+
 			'</option>';
 			$('#roomselect').append(str);
@@ -115,9 +135,34 @@ $(document)
 })
 
 
+.on('click','#reserv',function(){
+	var AA=$('#checkin').val()
+	var BB=$('#checkout').val()
+	if(AA>BB){
+		alert("잘못된 날짜");
+		return false;		
+	}else{	
+	var checkin = $('#checkin').val();	
+	var checkout = $('#checkout').val();
+	var ddate=checkin.split("-");
+	var ddate2=checkout.split("-");	
+	var roomcode=$('#ttest').val();
+	alert(checkin+""+checkout);
+	$.post('http://localhost:8081/app/reservRoom',{checkin:checkin,checkout:checkout,roomcode:roomcode},
+			 function(result){
+		  
+		  if(result=="ok"){
+			  location.reload();
+		  }
+	  }
+	)
+	}
+})
+
 .on('click','#roomselect',function(){
 	var bad=$('#roomselect').val();    
 	var arry=bad.split(",");
+	
 	$('#room_select_name').val(arry[1])	
 	$('#boon').val(arry[2])
 	$('#hMuch').val(arry[4])
@@ -127,16 +172,19 @@ $(document)
     
     
   .on('click','#btn-add',function(){
-	  
+	  var bad=$('#roomselect').val();    
+		var arry=bad.split(",");
+		let roomtype=arry[5]
 	  let roomname=$('#room_select_name').val()
-	  let roomtype=$('#rSelect').val()
+	  
 	  let howmany=$('#hMany').val()
-	 let howmuch=$('#hMuch').val()  
+	 let howmuch=$('#hMuch').val() 
+	 
 	 
 	
 	  if($('#ttest').val()==''){
 		  alert(roomname+""+roomtype+""+howmany+""+howmuch)
-		  $.post('http://localhost:8080/app/addRoom',{roomname:roomname,roomtype:roomtype,howmany:howmany,howmuch:howmuch},
+		  $.post('http://localhost:8081/app/addRoom',{roomname:roomname,roomtype:roomtype,howmany:howmany,howmuch:howmuch},
 			 function(result){			  
 				  if(result=="ok"){
 					  location.reload();
@@ -147,8 +195,8 @@ $(document)
 		  var bad=$('#roomselect').val();    
 			var arry=bad.split(",");
 			let roomcode=arry[0]
-		  alert(roomcode)
-		  $.post('http://localhost:8080/app/updateRoom',{roomcode:roomcode,roomname:roomname,roomtype:roomtype,howmany:howmany,howmuch:howmuch},
+		  
+		  $.post('http://localhost:8081/app/updateRoom',{roomcode:roomcode,roomname:roomname,roomtype:roomtype,howmany:howmany,howmuch:howmuch},
 					 function(result){
 			  
 						  if(result=="ok"){
@@ -168,7 +216,7 @@ $(document)
 .on('click','#btn-delete',function(){
 	var bad=$('#roomselect').val();    
 	var arry=bad.split(",");
-	$.post('http://localhost:8080/app/deleteRoom',{roomcode:arry[0]},
+	$.post('http://localhost:8081/app/deleteRoom',{roomcode:arry[0]},
 			function(result){
 		console.log(result);
 		if(result=="ok"){
@@ -176,9 +224,19 @@ $(document)
 			$("#roomselect option:selected").remove();
 		}
 	},'text');
-
 })
-;
+.on('submit','#ksj2',function(){	
+    })
+/* $('#checkin,#checkout').change(function(){
+	var date = $('#checkin').val();
+	
+	var date2 = $('#checkout').val();
+	var ddate=date.split("-");
+	var ddate2=date2.split("-");
+	alert(ddate[2]+""+ddate2[2]);
+}) */
+
+
 </script>
     </body>
     </html>
