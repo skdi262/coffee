@@ -122,7 +122,7 @@
 
 $(document)
 .ready(function(){
-	$.post("http://localhost:8081/app/getRoomList",{},function(result){
+	$.post("http://localhost:8080/app/getRoomList",{},function(result){
 		console.log(result);
 		$.each(result,function(ndx,value){
 			str='<option value="'+value['roomcode']+','+value['roomname']+','+value['typename']+','+value['howmany']+','+value['howmuch']+','+value['typecode']+'">'+value['roomname']+
@@ -148,7 +148,7 @@ $(document)
 	var ddate2=checkout.split("-");	
 	var roomcode=$('#ttest').val();
 	alert(checkin+""+checkout);
-	$.post('http://localhost:8081/app/reservRoom',{checkin:checkin,checkout:checkout,roomcode:roomcode},
+	$.post('http://localhost:8080/app/reservRoom',{checkin:checkin,checkout:checkout,roomcode:roomcode},
 			 function(result){
 		  
 		  if(result=="ok"){
@@ -184,7 +184,7 @@ $(document)
 	
 	  if($('#ttest').val()==''){
 		  alert(roomname+""+roomtype+""+howmany+""+howmuch)
-		  $.post('http://localhost:8081/app/addRoom',{roomname:roomname,roomtype:roomtype,howmany:howmany,howmuch:howmuch},
+		  $.post('http://localhost:8080/app/addRoom',{roomname:roomname,roomtype:roomtype,howmany:howmany,howmuch:howmuch},
 			 function(result){			  
 				  if(result=="ok"){
 					  location.reload();
@@ -196,7 +196,7 @@ $(document)
 			var arry=bad.split(",");
 			let roomcode=arry[0]
 		  
-		  $.post('http://localhost:8081/app/updateRoom',{roomcode:roomcode,roomname:roomname,roomtype:roomtype,howmany:howmany,howmuch:howmuch},
+		  $.post('http://localhost:8080/app/updateRoom',{roomcode:roomcode,roomname:roomname,roomtype:roomtype,howmany:howmany,howmuch:howmuch},
 					 function(result){
 			  
 						  if(result=="ok"){
@@ -216,7 +216,7 @@ $(document)
 .on('click','#btn-delete',function(){
 	var bad=$('#roomselect').val();    
 	var arry=bad.split(",");
-	$.post('http://localhost:8081/app/deleteRoom',{roomcode:arry[0]},
+	$.post('http://localhost:8080/app/deleteRoom',{roomcode:arry[0]},
 			function(result){
 		console.log(result);
 		if(result=="ok"){

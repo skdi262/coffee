@@ -120,7 +120,7 @@
 
 $(document)
 .ready(function(){
-	$.post("http://localhost:8081/app/getReservList",{},function(result){
+	$.post("http://localhost:8080/app/getReservList",{},function(result){
 		console.log(result);
 		$.each(result,function(ndx,value){
 			str='<option value="'+value['checkin']+','+value['checkout']+','+value['rName']+','+value['roomcode']+','+value['typecode']+','+value['typename']+','+value['howmany']+','+value['howmuch']+','+value['reservcode']+','+value['newName']+'">'+value['rName']+
@@ -154,7 +154,7 @@ $(document)
 		var arry=bad.split(",");
 		var reservcode = arry[8]
 		alert(checkin+""+checkout+"||"+reservcode);
-		$.post('http://localhost:8081/app/updateReserve',{checkin:checkin,checkout:checkout,reservcode:reservcode},
+		$.post('http://localhost:8080/app/updateReserve',{checkin:checkin,checkout:checkout,reservcode:reservcode},
 				 function(result){
 			  
 			  if(result=="ok"){
@@ -173,7 +173,7 @@ $(document)
 	var bad=$('#roomselect').val();    
 	var arry=bad.split(",");
 	var reservcode=arry[8]
-	$.post('http://localhost:8081/app/deleteReserve',{reservcode:reservcode},
+	$.post('http://localhost:8080/app/deleteReserve',{reservcode:reservcode},
 			function(result){
 		console.log(result);
 		if(result=="ok"){
