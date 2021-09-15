@@ -36,7 +36,7 @@ $(document)
 	$.post('http://localhost:8080/app/ssss',{signid:signid ,signName:signName,signPass:signPass},
 			function(result){
 		if(result=="ok"){
-			location.href="http://localhost:8081/app/"
+			location.href="http://localhost:8080/app/"
 		}
 	}
 	 )

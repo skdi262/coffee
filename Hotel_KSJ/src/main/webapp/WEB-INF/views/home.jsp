@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
-
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/ksjcss.css" type="text/css">
 <html>
 <head>
 	<title>Home</title>
@@ -9,16 +9,26 @@
 <body>
     <script src="https://code.jquery.com/jquery-3.4.1.js">
     </script>
-    <h1>
-        Welcome to the Hotel California  
+    <div>
+     <h1 class="h1">
+        <a href="http://localhost:8080/app/">호텔 예약관리</a>
     </h1>
+    </div>
+    <div class="divlogin">
+        로그인
     <form action ="check_user" method = post id = formLogin>
-    아이디 입력 : <input type="text" id="homeId" name="homeId"><br>
-    비밀번호 입력 : <input type="text" id="passcode" name=passcode><br>
-    <input type= submit value="로그인">
-    <input type= button value="회원가입" id=newbie>
+    <input type="text" class=homeid id="homeId" name="homeId" value="아이디 입력" onfocus="a(this)"><br>
+    <input type="text" class=passcode id="passcode" name=passcode value="비밀번호 입력" onfocus="a(this); type='password'"><br>
+    <input type= submit class=submit value="로그인">
+    <input type= button class=newbie value="회원가입" id=newbie>
     </form>
+</div>
     <script>
+        function a(y){
+   if (y.defaultValue==y.value) {
+      y.value = "";
+   }
+}
     $(document)
     .on('click','#newbie',function(){
     	location.href="/app/newbie";
@@ -39,6 +49,7 @@
     		return false;
     	}    	
     })
+
     </script>
     </body>
     </html>

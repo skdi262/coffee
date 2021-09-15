@@ -13,7 +13,11 @@
  <body>
  <script src="https://code.jquery.com/jquery-3.4.1.js">
     </script>
-
+ <div>
+   <h1 class="h1">
+        <a href="http://localhost:8080/app/">호텔 예약관리</a>
+    </h1>
+    </div>
         <div id="wrap">
          <form action ="ksj2" method = post id =ksj2 name=ksj2>
     <input type="button" name='moun' id='moun' value="객실관리" style="float: left; margin-right: 50px;">

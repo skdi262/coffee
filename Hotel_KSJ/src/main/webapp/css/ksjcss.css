@@ -3,23 +3,24 @@
 }
 #clickroom{list-style: none;
 	text-align:center;
-   padding-left: 20px;
+   padding-left: 10px;
    padding-top: 1px;
 }
-#click_room_list{border:solid;
+#click_room_list{
+	border:solid 1px;
 text-align:center;
    float: left;
    width: 400px; 
    margin-top: 30px;
-   margin-left: 5px;
+   
 
 }
 #one_btns li {list-style-type: none; float: left;margin-left: 5px;}
 #roomname {
    width: auto;
-   background-color: aquamarine;
+   background-color: bisque;
    float: left; 
-   height: 200px;
+   height: 205px;
    margin-left: 50px;
    margin-top: 50px;
 }
@@ -29,12 +30,54 @@ text-align:center;
    height :25px;
    float: left;
    font-size: 18px;
-   border: solid;
+   border: solid 1px;
+   padding-left:10px;
+   margin-left:20px
 }
 ul li {list-style-type: none;margin-left: 5px;}
 #readybtn li {list-style-type: none; float: left;margin-left: 5px;}
 #navi {float: left; margin-top: 20px; border: solid; width: 30%; min-width: 30%;}
 #reserv_room_li{float: left; border: solid; width: 200px;height: 200px;}
 #reserved_room{float: left; margin-left: 50px; border: solid; width: 200px ;height: 200px;}
-
-    
+.divlogin {
+    position: absolute;
+    width: 50%;
+    left: 25%;
+    border: 1px solid rgb(238, 155, 31);
+    text-align: center;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 25px;
+    font-weight: 600;
+}
+.h1{
+    background-color: bisque;
+    border-bottom: solid 1px ;
+    text-align: center;       
+    height: 50px;    
+    vertical-align: middle;
+    padding-top: 10px;
+}
+.passcode,.homeid{
+    height: auto;
+    font-size: 16px;
+}
+.submit,.newbie{
+    background-color: bisque;
+    border: none;
+}
+.submit:hover,.newbie:hover{
+    background-color: rgb(245, 151, 37);
+    color: black;
+}
+a:link{
+    color: black;
+    text-decoration: none;
+}
+a:visited{
+    text-decoration: none;
+    color: black;
+}
+#ttable{
+	border:solid #111 1px;
+}  

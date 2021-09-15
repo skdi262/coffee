@@ -11,10 +11,16 @@
 	
 </head>
  <body>
+ 
  <script src="https://code.jquery.com/jquery-3.4.1.js">
     </script>
 
         <div id="wrap">
+            <div>
+     <h1 class="h1">
+        <a href="http://localhost:8080/app/">호텔 예약관리</a>
+    </h1>
+    </div>
             
           <form action ="ksj" method=post id=rksj>
     <input type="submit" value="객실관리" style="float: left; margin-right: 50px;">
@@ -23,11 +29,11 @@
         <br>
         <br>
         <div>
-        <div id="roomList">        
-            <div>
+        <div id="roomList" >        
+
                 객실목록 KSJ2
-            </div>
-            <div style="margin">
+
+            <div>
             <table id=checkdate name=checkdate>            
             <tr>
             <td>체크 인</td><td><input type="text" id="checkin" name="checkin">
